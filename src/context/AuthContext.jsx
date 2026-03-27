@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
     const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');  // ← IMPORTANT: Get email
     const userId = localStorage.getItem('userId');
     const hostelBlock = localStorage.getItem('hostelBlock');
     const roomNumber = localStorage.getItem('roomNumber');
@@ -19,7 +20,8 @@ export const AuthProvider = ({ children }) => {
       setUser({ 
         token, 
         role, 
-        name, 
+        name,
+        email,  // ← IMPORTANT: Set email
         userId: userId ? parseInt(userId) : null,
         hostelBlock: hostelBlock || null,
         roomNumber: roomNumber || null
@@ -29,10 +31,11 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (data) => {
-    // Save everything to localStorage
+    // Save EVERYTHING to localStorage
     localStorage.setItem('token', data.token);
     localStorage.setItem('role', data.role);
     localStorage.setItem('name', data.name);
+    localStorage.setItem('email', data.email);  // ← IMPORTANT: Save email
     localStorage.setItem('userId', data.userId);
     
     // Save student-specific data if it exists
@@ -43,11 +46,12 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('roomNumber', data.roomNumber);
     }
     
-    // Set user state
+    // Set user state with email
     setUser({ 
       token: data.token, 
       role: data.role, 
-      name: data.name, 
+      name: data.name,
+      email: data.email,  // ← IMPORTANT: Include email in state
       userId: data.userId,
       hostelBlock: data.hostelBlock || null,
       roomNumber: data.roomNumber || null
@@ -59,6 +63,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('name');
+    localStorage.removeItem('email');  // ← IMPORTANT: Remove email
     localStorage.removeItem('userId');
     localStorage.removeItem('hostelBlock');
     localStorage.removeItem('roomNumber');

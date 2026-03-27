@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 const Profile = () => {
   const { user } = useAuth();
 
+  console.log('User data:', user); // For debugging - remove later
+
   return (
     <div className="flex min-h-screen" style={{ backgroundColor: '#F9FAFB' }}>
       <Sidebar />
