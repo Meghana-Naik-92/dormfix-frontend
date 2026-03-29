@@ -3,8 +3,7 @@
 > React frontend for DormFix Hostel Issue Reporter  
 > Built with React 18 + Vite + Tailwind CSS
 
-🔗 Backend Repository: [dormfix-backend](https://github.com/
-Meghana-Naik-92/dormfix)
+🔗 Backend Repository: [dormfix-backend](https://github.com/Meghana-Naik-92/dormfix-backend)
 
 ---
 
