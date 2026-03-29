@@ -152,7 +152,7 @@ App runs at `http://localhost:5173`
 
 ## Author
 
-**Your Name**  
+**Meghana M Naik**  
 Computer Science Engineering Student  
 GitHub: [@Meghana-Naik-92](https://github.com/Meghana-Naik-92)  
 LinkedIn: [Meghana Naik](https://www.linkedin.com/in/meghana-naik-832971324)
