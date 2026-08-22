@@ -32,6 +32,8 @@ DormFix is a complaint management system for college hostels. This repository co
 |---|---|---|
 | Login | `/login` | Everyone |
 | Register | `/register` | Everyone |
+| Forgot Password | `/forgot-password` | Everyone |
+| Reset Password | `/reset-password` | Everyone |
 | Student Dashboard | `/student` | Student only |
 | Submit Complaint | `/student/submit` | Student only |
 | Complaint Detail | `/student/complaint/:id` | Student only |
@@ -139,6 +141,7 @@ App runs at `http://localhost:5173`
 - Submit complaints with title, description and category
 - Track status of your complaints (Pending → In Progress → Resolved)
 - View complaint details and timeline
+- Edit your submitted complaints (only if they are still in "PENDING" status)
 - See your stats on the dashboard
 
 ### As an Admin
@@ -146,6 +149,14 @@ App runs at `http://localhost:5173`
 - Filter by status or hostel block
 - Update complaint status
 - See overall hostel stats
+- Update complaint status with strict forward-only progression (Pending → In Progress → Resolved)
+
+### General Features & Security
+- Secure password recovery via "Forgot Password" email flow
+- Strict server-side input validation for user registration
+- Global copyright footer across all pages
+
+
 
 ---
 
