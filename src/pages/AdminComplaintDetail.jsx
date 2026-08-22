@@ -130,12 +130,12 @@ const AdminComplaintDetail = () => {
               <div className="mt-2 flex gap-3">
                 <button
                   onClick={() => handleStatusUpdate('PENDING')}
-                  disabled={updating || complaint.status === 'PENDING'}
+                  disabled={true}
                   className="px-4 py-2 rounded-md transition-colors duration-200 font-medium disabled:opacity-50"
                   style={{ 
                     backgroundColor: getButtonColor('PENDING', complaint.status),
                     color: complaint.status === 'PENDING' ? 'white' : '#374151',
-                    cursor: updating || complaint.status === 'PENDING' ? 'not-allowed' : 'pointer'
+                    cursor: 'not-allowed'
                   }}
                   onMouseEnter={(e) => {
                     if (complaint.status !== 'PENDING') {
@@ -152,12 +152,12 @@ const AdminComplaintDetail = () => {
                 </button>
                 <button
                   onClick={() => handleStatusUpdate('IN_PROGRESS')}
-                  disabled={updating || complaint.status === 'IN_PROGRESS'}
+                  disabled={updating || complaint.status === 'IN_PROGRESS' || complaint.status === 'RESOLVED'}
                   className="px-4 py-2 rounded-md transition-colors duration-200 font-medium disabled:opacity-50"
                   style={{ 
                     backgroundColor: getButtonColor('IN_PROGRESS', complaint.status),
                     color: complaint.status === 'IN_PROGRESS' ? 'white' : '#374151',
-                    cursor: updating || complaint.status === 'IN_PROGRESS' ? 'not-allowed' : 'pointer'
+                    cursor: updating || complaint.status === 'IN_PROGRESS' || complaint.status === 'RESOLVED' ? 'not-allowed' : 'pointer'
                   }}
                   onMouseEnter={(e) => {
                     if (complaint.status !== 'IN_PROGRESS') {

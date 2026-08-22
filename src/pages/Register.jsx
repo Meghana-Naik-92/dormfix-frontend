@@ -47,7 +47,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: '#F5F3FF' }}>
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8" style={{ border: '1px solid #E0D9FF' }}>
+      <div className="max-w-lg w-full bg-white rounded-xl shadow-lg p-8" style={{ border: '1px solid #E0D9FF' }}>
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold" style={{ color: '#7F77DD' }}>Create Account</h1>
           <p className="text-gray-600 mt-2">Join DormFix</p>
@@ -64,6 +64,8 @@ const Register = () => {
               value={formData.name}
               onChange={handleChange}
               required
+              pattern="^[A-Za-z\s]+$"
+              title="Name must only contain letters and spaces"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all"
               style={{ borderColor: '#E0D9FF' }}
               onFocus={(e) => {
@@ -104,7 +106,8 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              minLength="6"
+              pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$"
+              title="Must be at least 8 characters, include upper/lower case, number, and special character (@#$%^&+=!)"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all"
               style={{ borderColor: '#E0D9FF' }}
               onFocus={(e) => {
@@ -134,25 +137,34 @@ const Register = () => {
           </div>
 
           {formData.role === 'STUDENT' && (
-            <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
                   Hostel Block
                 </label>
-                <input
-                  type="text"
+                <select
                   name="hostelBlock"
                   value={formData.hostelBlock}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all"
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all bg-white"
                   style={{ borderColor: '#E0D9FF' }}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#7F77DD';
-                    e.target.style.ring = '2px solid #7F77DD';
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(127, 119, 221, 0.2)';
                   }}
-                  onBlur={(e) => e.target.style.borderColor = '#E0D9FF'}
-                />
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#E0D9FF';
+                    e.target.style.boxShadow = 'none';
+                  }}
+                >
+                  <option value="" disabled>Select Block</option>
+                  <option value="Block A">Block A</option>
+                  <option value="Block B">Block B</option>
+                  <option value="Block C">Block C</option>
+                  <option value="Block D">Block D</option>
+                </select>
               </div>
 
               <div>
@@ -165,16 +177,21 @@ const Register = () => {
                   value={formData.roomNumber}
                   onChange={handleChange}
                   required
+                  placeholder="e.g. 101"
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 transition-all"
                   style={{ borderColor: '#E0D9FF' }}
                   onFocus={(e) => {
                     e.target.style.borderColor = '#7F77DD';
-                    e.target.style.ring = '2px solid #7F77DD';
+                    e.target.style.outline = 'none';
+                    e.target.style.boxShadow = '0 0 0 2px rgba(127, 119, 221, 0.2)';
                   }}
-                  onBlur={(e) => e.target.style.borderColor = '#E0D9FF'}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#E0D9FF';
+                    e.target.style.boxShadow = 'none';
+                  }}
                 />
               </div>
-            </>
+            </div>
           )}
 
           <button

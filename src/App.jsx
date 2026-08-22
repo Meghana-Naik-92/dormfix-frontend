@@ -11,6 +11,8 @@ import ComplaintDetail from './pages/ComplaintDetail';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminComplaintDetail from './pages/AdminComplaintDetail';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
           {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Student routes */}
           <Route path="/student" element={
@@ -84,6 +88,13 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
+        
+        {/* Global Copyright Footer */}
+        <div className="fixed bottom-2 w-full text-center pointer-events-none z-50">
+          <p className="text-xs text-gray-500/80 font-medium tracking-wide">
+            COPYRIGHT © 2026 MEGHANAMNAIK. ALL RIGHT RESERVED
+          </p>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   );

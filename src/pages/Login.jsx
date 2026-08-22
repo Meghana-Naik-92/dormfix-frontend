@@ -83,6 +83,11 @@ const Login = () => {
               placeholder="••••••••"
             />
           </div>
+          <div className="text-right">
+  <Link to="/forgot-password" className="text-sm hover:underline" style={{ color: '#7F77DD' }}>
+    Forgot Password?
+  </Link>
+</div>
 
           <button
             type="submit"
@@ -94,6 +99,7 @@ const Login = () => {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
+          
         </form>
 
         <p className="text-center text-gray-600 mt-6">

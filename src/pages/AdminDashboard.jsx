@@ -10,8 +10,11 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('');
   const [filterBlock, setFilterBlock] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
+    setCurrentPage(1);
     fetchData();
   }, [filter, filterBlock]);
 
@@ -56,6 +59,11 @@ const AdminDashboard = () => {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentComplaints = complaints.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(complaints.length / itemsPerPage);
 
   if (loading) {
     return (
@@ -157,7 +165,7 @@ const AdminDashboard = () => {
                </tr>
             </thead>
             <tbody className="divide-y" style={{ divideColor: '#F3F4F6' }}>
-              {complaints.map((complaint) => (
+              {currentComplaints.map((complaint) => (
                 <tr key={complaint.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link 
@@ -207,11 +215,12 @@ const AdminDashboard = () => {
                       value={complaint.status}
                       onChange={(e) => handleStatusUpdate(complaint.id, e.target.value, e)}
                       onClick={(e) => e.stopPropagation()}
-                      className="px-2 py-1 border rounded-md text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      disabled={complaint.status === 'RESOLVED'}
+                      className="px-2 py-1 border rounded-md text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ borderColor: '#E0D9FF' }}
                     >
-                      <option value="PENDING">Set Pending</option>
-                      <option value="IN_PROGRESS">Set In Progress</option>
+                      {complaint.status === 'PENDING' && <option value="PENDING">Set Pending</option>}
+                      {(complaint.status === 'PENDING' || complaint.status === 'IN_PROGRESS') && <option value="IN_PROGRESS">Set In Progress</option>}
                       <option value="RESOLVED">Set Resolved</option>
                     </select>
                   </td>
@@ -226,6 +235,39 @@ const AdminDashboard = () => {
             </div>
           )}
         </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center mt-6 space-x-2">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border rounded-md disabled:opacity-50 transition-colors"
+              style={{ 
+                borderColor: '#E0D9FF', 
+                backgroundColor: currentPage === 1 ? '#F9FAFB' : '#FFFFFF',
+                color: currentPage === 1 ? '#9CA3AF' : '#4B5563'
+              }}
+            >
+              Previous
+            </button>
+            <span className="px-4 py-2" style={{ color: '#4B5563' }}>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 border rounded-md disabled:opacity-50 transition-colors"
+              style={{ 
+                borderColor: '#E0D9FF',
+                backgroundColor: currentPage === totalPages ? '#F9FAFB' : '#FFFFFF',
+                color: currentPage === totalPages ? '#9CA3AF' : '#4B5563'
+              }}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

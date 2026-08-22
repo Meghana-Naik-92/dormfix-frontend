@@ -26,6 +26,8 @@ export const getMyStatsApi = () =>
   api.get('/complaints/stats');
 export const getComplaintByIdApi = (id) =>
   api.get(`/complaints/${id}`);
+export const updateComplaintApi = (id, data) =>
+  api.put(`/complaints/${id}`, data);
 
 // Admin
 export const getAllComplaintsApi = (params) =>
@@ -38,5 +40,8 @@ export const updateComplaintStatusApi = (id, status) =>
   api.patch(`/admin/complaints/${id}/status`, null, {
     params: { status }
   });
+
+export const forgotPasswordApi = (data) => api.post('/auth/forgot-password', data);
+export const resetPasswordApi = (data) => api.post('/auth/reset-password', data);
 
 export default api;
